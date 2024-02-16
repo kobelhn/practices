@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Forms & Validation</title>
+</head>
+
+<body>
+    <form id="registrationForm" action="#" method="post">
+        <!-- required 属性指定输入字段为必填项 -->
+        <label for="username">用户名：</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+
+        <!-- type="email" 属性指定输入字段为电子邮件类型 -->
+        <label for="email">邮箱：</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+
+        <!-- type="password" 属性指定输入字段为密码类型 -->
+        <!-- minlength 属性指定密码最小长度 -->
+        <label for="password">密码：</label>
+        <input type="password" id="password" name="password" minlength="8" required>
+        <br><br>
+
+        <!-- pattern 属性指定输入字段的正则表达式模式 -->
+        <label for="phone">电话号码：</label>
+        <input type="text" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <br><br>
+
+        <!-- type="date" 属性指定输入字段为日期类型 -->
+        <label for="birthdate">出生日期：</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+        <br><br>
+
+        <!-- type="color" 属性指定输入字段为颜色类型 -->
+        <label for="favoriteColor">喜欢的颜色：</label>
+        <input type="color" id="favoriteColor" name="favoriteColor" required>
+        <br><br>
+
+        <!-- type="range" 属性指定输入字段为范围类型 -->
+        <!-- min 属性指定最小值，max 属性指定最大值，step 属性指定步长 -->
+        <label for="age">年龄：</label>
+        <input type="range" id="age" name="age" min="18" max="100" step="1" required>
+        <br><br>
+
+        <!-- type="url" 属性指定输入字段为URL类型 -->
+        <label for="website">个人网站：</label>
+        <input type="url" id="website" name="website" required>
+        <br><br>
+
+        <!-- type="checkbox" 属性指定复选框类型 -->
+        <!-- checked 属性指定默认选中状态 -->
+        <label for="subscribe">订阅邮件：</label>
+        <input type="checkbox" id="subscribe" name="subscribe" checked>
+        <br><br>
+
+        <!-- type="radio" 属性指定单选按钮类型 -->
+        <label>性别：</label>
+        <label for="male">
+            <input type="radio" id="male" name="gender" value="male" required>男性
+        </label>
+        <label for="female">
+            <input type="radio" id="female" name="gender" value="female" required>女性
+        </label>
+        <br><br>
+
+        <!-- type="file" 属性指定文件上传字段类型 -->
+        <label for="profilePic">个人头像：</label>
+        <input type="file" id="profilePic" name="profilePic" accept="image/*" required>
+        <br><br>
+
+        <!-- type="submit" 属性指定提交按钮类型 -->
+        <input type="submit" value="注册">
+    </form>
+</body>
+
+</html>

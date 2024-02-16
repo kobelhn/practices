@@ -1,0 +1,236 @@
+/* 2D转换 */
+/* 根据给定的参数沿X轴和Y轴移动元素 */
+.example.translate {
+  transform: translate(10px, 10px);
+}
+
+/* 根据给定的参数顺时针或逆时针旋转元素 */
+.example.rotate {
+  transform: rotate(90deg);
+}
+
+/* 根据给定的参数增加或减少元素宽度 */
+.example.scale-x {
+  transform: scaleX(.5);
+}
+
+/* 根据给定的参数增加或减少元素高度 */
+.example.scale-y {
+  transform: scaleY(2);
+}
+
+/* 根据给定的参数增加或减少元素宽度和高度 */
+.example.scale {
+  transform: scale(.5, 2);
+}
+
+/* 根据给定的参数沿X轴倾斜元素 */
+.example.skew-x {
+  transform: skewX(30deg);
+}
+
+/* 根据给定的参数沿Y轴倾斜元素 */
+.example.skew-y {
+  transform: skewY(30deg);
+}
+
+/* 根据给定的参数沿X轴和Y轴倾斜元素 */
+.example.skew {
+  transform: skew(30deg, 180deg);
+}
+
+/* 不建议使用 */
+/* matrix() 方法把所有 2D 转换方法组合在一起。matrix() 方法需要六个参数，包含数学函数，允许您：旋转、缩放、移动以及倾斜元素。 */
+.example.matrix {
+  transform: matrix(2, 0.3, 1.2, 2, 10, 10);
+}
+
+/* 3D转换 */
+/* 根据给定参数使元素绕其X轴旋转给定角度 */
+.example.rotate-x {
+  transform: rotateX(150deg);
+}
+
+/* 根据给定参数使元素绕其Y轴旋转给定角度 */
+.example.rotate-y {
+  transform: rotateY(150deg);
+}
+
+/* 根据给定参数使元素绕其Z轴旋转给定角度 */
+.example.rotate-z {
+  transform: rotateZ(150deg);
+}
+
+/* 3D转换的一个示例 */
+.cube {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(0) rotateY(0);
+  animation: rotate 10s infinite linear;
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid #000;
+  font-size: 20px;
+  text-align: center;
+  line-height: 200px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.front {
+  transform: translateZ(100px);
+}
+
+.back {
+  transform: rotateY(180deg) translateZ(100px);
+}
+
+.right {
+  transform: rotateY(90deg) translateZ(100px);
+}
+
+.left {
+  transform: rotateY(-90deg) translateZ(100px);
+}
+
+.top {
+  transform: rotateX(90deg) translateZ(100px);
+}
+
+.bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateX(0) rotateY(0);
+  }
+
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+.example.transition-w-h {
+  transition: width 2s, height 2s, background-color 2s;
+}
+
+.example.transition-w-h:hover {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.example.transition-timing-function {
+  transition: width 2s ease-out, height 2s linear, background-color 2s ease-in;
+}
+
+.example.transition-timing-function:hover {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+  /* transition-timing-function: linear; */
+  /* transition-timing-function: ease; */
+  /* transition-timing-function: ease-in; */
+  /* transition-timing-function: ease-out; */
+  /* transition-timing-function: ease-in-out; */
+  /* transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1); */
+}
+
+.example.transition-delay {
+  transition: width 2s, height 2s, background-color 2s;
+  transition-delay: 3s;
+}
+
+.example.transition-delay:hover {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
+
+.example.transition-transform {
+  transition: width 2s, height 2s, background-color 2s, transform 2s;
+}
+
+.example.transition-transform:hover {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+  transform: rotate(360deg);
+}
+
+.example.transition-simple {
+  transition: all 2s linear 3s;
+}
+
+.example.transition-simple:hover {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+  transform: rotate(360deg);
+  border: #000 5px solid;
+}
+
+@keyframes one {
+  from {
+    background-color: #000;
+  }
+
+  to {
+    background-color: red;
+  }
+}
+
+.example.animation-one {
+  animation: one 2s;
+}
+
+.animation-box {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  /* 动画名称 */
+  animation-name: example;
+  /* 动画持续时间 */
+  animation-duration: 2s;
+  /* 动画时间曲线 */
+  animation-timing-function: ease-in-out;
+  /* 动画延迟时间 */
+  animation-delay: 1s;
+  /* 动画迭代次数 */
+  animation-iteration-count: infinite;
+  /* 动画播放方向 */
+  animation-direction: alternate;
+  /* 动画填充模式 */
+  animation-fill-mode: forwards;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes example {
+  0% {
+    transform: translateX(0);
+    /* 初始状态 */
+  }
+
+  50% {
+    transform: translateX(200px);
+    /* 中间状态 */
+    background-color: blue;
+    /* 中间状态 */
+  }
+
+  100% {
+    transform: translateX(0);
+    /* 结束状态 */
+    background-color: red;
+    /* 结束状态 */
+  }
+}

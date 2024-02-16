@@ -1,0 +1,40 @@
+<template>
+     <!-- 递归便利config.blocks -->
+     <% function recursiveLoop(items) {
+        items.forEach(function(item) {
+            const key = item.key
+            const id = item.id
+            const { type, layout } = item._config || {
+                type: undefined,
+                layout: {
+                    type: undefined
+                }
+            }
+            const componentType = type ? [type, layout.type].join('-') : undefined
+            const next = item.children || item.blocks;
+            
+            %>
+            <% if (id === '@root') { %>
+            <div class="container" key="<%= id %>">
+            <% } else { %>
+                <div><%= item.key || item.id %></div>
+            <% } %>
+
+            <% 
+            if (Array.isArray(next) && next.length > 0) {
+                // 递归调用自身
+                recursiveLoop(next);
+            }
+        });
+    } %>
+    <% recursiveLoop(blocks); %>
+</div>
+</template>
+
+<script setup>
+    
+</script>
+
+<style>
+
+</style>

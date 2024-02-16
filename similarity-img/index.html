@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .flex {
+        display: flex;
+    }
+    img {
+        width: 100px;
+        height: 100px;
+    }
+</style>
+
+<body>
+    <h2>图片相似度对比</h2>
+    <div>SSIM插件：<a href="https://github.com/obartra/ssim" target="_blank">https://github.com/obartra/ssim</a></div>
+    <div>代码来源：<a href="https://www.zhangxinxu.com/wordpress/2023/12/js-img-image-similarity/" target="_blank">https://www.zhangxinxu.com/wordpress/2023/12/js-img-image-similarity/</a></div>
+    <section>
+        <h4>自己本地选图</h4>
+        <div class="flex">
+            <figure>
+                <input type="file" accept="image/*">
+            </figure>
+            <figure>
+                <input type="file" accept="image/*">
+            </figure>
+        </div>
+        <p>相似度是：<output>?</output></p>
+    </section>
+</body>
+<script src="./lib/ssim.web.js"></script>
+<script>
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d', {
+        willReadFrequently: true
+    });
+    const image2data = (img, flag) => {
+        const { width, height } = canvas;
+        ctx.clearRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+        return ctx.getImageData(0, 0, width, height);
+    };
+
+    const inputs = document.querySelectorAll('[type="file"]');
+    const inputImgs = [];
+    const compareImg = () => {
+        if (inputImgs.length === 2) {
+            let { width, height } = inputImgs[0];
+            if (width * height > inputImgs[1].width * inputImgs[0].height) {
+                width = inputImgs[1].width;
+                height = inputImgs[1].height;
+            }
+            canvas.width = width;
+            canvas.height = height;
+
+            const { mssim, performance } = ssim.ssim(image2data(inputImgs[0]), image2data(inputImgs[1]));
+
+            const output = inputImgs[0].closest('section').querySelector('output');
+            output.textContent = `${mssim} (${performance}ms)`;
+        }
+    }
+    inputs.forEach((input, index) => {
+        input.onchange = function (event) {
+            const file = event.target.files[0];
+            const img = input.nextElementSibling || new Image();
+            img.onload = function () {
+                inputImgs[index] = img;
+                compareImg();
+            };
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                img.src = reader.result;
+                if (!img.isConnected) {
+                    input.after(img);
+                }
+            }, false);
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+</html>

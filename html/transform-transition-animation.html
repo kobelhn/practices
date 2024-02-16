@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-2D、3D转换、动画</title>
+    <link rel="stylesheet" href="../styles/css/transform-transition-animation.css">
+</head>
+<style>
+    body {
+        padding: 50px;
+    }
+    .example {
+        width: 300px;
+        height: 100px;
+        background-color: #000;
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 100px;
+    }
+
+    /* .font-0 {
+        font-size: 0;
+    } */
+</style>
+
+<body>
+    <h1>转换</h1>
+    <h2>2D转换</h2>
+    <h2>2D转换后，元素原本占位的空间并没有变，每个元素还是占据宽200px高200px的位置</h2>
+    <div class="font-0">
+        <div class="example">原始</div>
+        <div class="example translate">translate(10px, 10px)</div>
+        <div class="example rotate">rotate(90deg)</div>
+        <div class="example">测试2D转换后，元素还是占的原元素宽高的固定位置</div>
+        <div class="example scale-x">scaleX(.5)</div>
+        <div class="example scale-y">scaleY(2)</div>
+        <div class="example scale">scale(.5, 2)</div>
+        <div class="example skew-x">skewX(30deg)</div>
+        <div class="example skew-y">skewY(30deg)</div>
+        <div class="example skew">skew(30deg, 180deg)</div>
+        <div class="example matrix">matrix(0.4, 0, 0.5, 1.2, 60, 10)</div>
+    </div>
+    <h2>3D转换</h2>
+    <div class="font-0">
+        <div class="example">原始</div>
+        <div class="example rotate-x">rotateX(150deg)</div>
+        <div class="example rotate-y">rotateY(150deg)</div>
+        <div class="example rotate-z">rotateZ(150deg)</div>
+    </div>
+    <h3>3D转换的一个示例</h3>
+    <div class="cube">
+        <div class="face front">前面</div>
+        <div class="face back">后面</div>
+        <div class="face right">右侧</div>
+        <div class="face left">左侧</div>
+        <div class="face top">顶部</div>
+        <div class="face bottom">底部</div>
+    </div>
+    <h1>过渡</h1>
+    <h2>过渡效果需在指定属性值变化时才会触发</h2>
+    <div class="example">原始</div>
+    <div class="example transition-w-h">transition: width 2s, height 2s, background-color 2s</div>
+    <div class="example transition-timing-function">transition: width 2s ease-out, height 2s linear, background-color 2s ease-in</div>
+    <div class="example transition-delay">transition: width 2s, height 2s, background-color 2s;transition-delay: 3s;</div>
+    <div class="example transition-transform">transition: width 2s, height 2s, background-color 2s, transform 2s;</div>
+    <div class="example">测试过渡属性是否影响元素占用的位置</div>
+    <div class="example transition-simple">transition: all 2s linear 3s;</div>
+    <h1>动画</h1>
+    <h2>动画效果会根据动画设置自动触发</h2>
+    <div class="example">原始</div>
+    <div class="example animation-one">animation: one 2s;</div>
+    <h3>一个动画的完整示例，每个属性支持哪些值参考文档</h3>
+    <div class="animation-box"></div>
+    <div class="example">测试动画属性是否影响元素占用的位置</div>
+
+    <p>转换和动画都不会影响元素占用的页面位置和区域，过渡由于属性值产生了变化，自然会影响到元素占用的位置和区域</p>
+</body>
+
+</html>

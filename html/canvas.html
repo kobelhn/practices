@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas & SVG</title>
+</head>
+
+<body>
+    <h2>绘制矩形 Canvas</h2>
+
+    <!-- 创建一个 canvas 元素 -->
+    <canvas id="myCanvas" width="300" height="200"></canvas>
+
+    <h2>绘制矩形 SVG</h2>
+
+
+    <script>
+        // 获取 canvas 元素
+        const canvas = document.getElementById('myCanvas');
+
+        // 检查浏览器是否支持 canvas
+        if (canvas.getContext) {
+            // 获取绘图上下文
+            const ctx1 = canvas.getContext('2d');
+
+            // 设置矩形的填充颜色
+            ctx1.fillStyle = 'red';
+
+            // 绘制一个矩形（左上角坐标为 (50, 50)，宽度为 200，高度为 100）
+            ctx1.fillRect(50, 50, 200, 100);
+
+            // 设置矩形的边框颜色和宽度
+            ctx1.strokeStyle = 'blue';
+            ctx1.lineWidth = 2;
+
+            // 绘制一个矩形的边框
+            ctx1.strokeRect(50, 50, 200, 100);
+
+            // 清除指定区域的矩形
+            ctx1.clearRect(60, 60, 180, 80);
+        } else {
+            // 如果浏览器不支持 canvas，则显示错误信息
+            console.log('抱歉，您的浏览器不支持 HTML5 Canvas。');
+        }
+    </script>
+
+    <!-- 创建一个 SVG 元素 -->
+    <svg id="mySvg" width="300" height="200">
+        <!-- 使用 rect 元素绘制矩形 -->
+        <rect x="50" y="50" width="200" height="100" fill="red" stroke="blue" stroke-width="2" />
+    </svg>
+
+    <script>
+        // 获取 SVG 元素
+        const svg = document.getElementById('mySvg');
+
+        // 检查浏览器是否支持 SVG
+        if (typeof SVGRect !== 'undefined') {
+            // 使用 SVGRect 对象进行矩形操作
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('x', '50');
+            rect.setAttribute('y', '50');
+            rect.setAttribute('width', '200');
+            rect.setAttribute('height', '100');
+            rect.setAttribute('fill', 'red');
+            rect.setAttribute('stroke', 'blue');
+            rect.setAttribute('stroke-width', '2');
+
+            // 将矩形添加到 SVG 中
+            svg.appendChild(rect);
+        } else {
+            // 如果浏览器不支持 SVG，则显示错误信息
+            console.log('抱歉，您的浏览器不支持 HTML5 SVG。');
+        }
+    </script>
+
+    <h2>Canvas 复刻图片</h2>
+    <div>
+        <p>原图:</p>
+
+        <img id="scream" width="224" height="162" src="https://www.w3school.com.cn/i/eg_flower.png" alt="The Scream">
+
+        <p>Canvas:</p>
+
+        <canvas id="myCanvas2" width="244" height="182" style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </div>
+
+    <script>
+        var canvas2 = document.getElementById("myCanvas2");
+        var ctx2 = canvas2.getContext("2d");
+        var img = document.getElementById("scream");
+        ctx2.drawImage(img, 10, 10);
+    </script>
+
+    <h2>Canvas 动画</h2>
+
+    <!-- 创建一个 canvas 元素 -->
+    <canvas id="myCanvas3" width="400" height="400"></canvas>
+
+    <script>
+        // 获取 canvas 元素
+        const canvas3 = document.getElementById('myCanvas3');
+        const ctx3 = canvas3.getContext('2d');
+
+        // 设置起始位置
+        let x = 200;
+        let y = 200;
+
+        // 设置移动速度
+        let dx = 2;
+        let dy = -2;
+
+        // 定义绘制动画的函数
+        function draw() {
+            // 清空画布
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+
+            // 绘制图形
+            ctx3.beginPath();
+            ctx3.arc(x, y, 20, 0, Math.PI * 2);
+            ctx3.fillStyle = 'red';
+            ctx3.fill();
+            ctx3.closePath();
+
+            // 更新位置
+            x += dx;
+            y += dy;
+
+            // 碰撞检测
+            if (x + dx > canvas3.width - 20 || x + dx < 20) {
+                dx = -dx;
+            }
+
+            if (y + dy > canvas3.height - 20 || y + dy < 20) {
+                dy = -dy;
+            }
+        }
+
+        // 定义动画循环函数
+        function animate() {
+            // 清空画布
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+
+            // 绘制动画
+            draw();
+
+            // 循环调用动画函数
+            requestAnimationFrame(animate);
+        }
+
+        // 启动动画
+        animate();
+    </script>
+</body>
+
+</html>
