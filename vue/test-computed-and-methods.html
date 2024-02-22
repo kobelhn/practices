@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试组件</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>Has published books:</p>
+      <!-- <span>{{ author.books.length > 0 ? 'Yes' : 'No' }}</span> -->
+      <span>{{ publishedBooksMessage }}</span>
+      <!-- <span>{{ calculateBooksMessage() }}</span> -->
+    </div>
+
+    <script type="module">
+      import {
+        createApp,
+        ref,
+        reactive,
+        computed,
+      } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+
+      createApp({
+        setup() {
+          const author = reactive({
+            name: "John Doe",
+            books: [
+              "Vue 2 - Advanced Guide",
+              "Vue 3 - Basic Guide",
+              "Vue 4 - The Mystery",
+            ],
+          });
+
+          // 一个计算属性 ref
+          const publishedBooksMessage = computed(() => {
+            // 依赖 author.books 当 author.books 变化时，任何依赖于 publishedBooksMessage 的绑定都会同时更新
+            return author.books.length > 3 ? "Yes" : "No";
+          });
+
+          function calculateBooksMessage() {
+            return author.books.length > 3 ? "Yes" : "No";
+          }
+
+          setTimeout(() => {
+            author.books.push("Vue 5 - The Myth");
+          }, 2000);
+
+          return {
+            author,
+            publishedBooksMessage,
+            calculateBooksMessage,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

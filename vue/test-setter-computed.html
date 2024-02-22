@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试组件</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>First Name: <input v-model="firstName" /></p>
+      <p>Last Name: <input v-model="lastName" /></p>
+      <p>Full Name: {{ fullName }}</p>
+    </div>
+
+    <script type="module">
+      import {
+        createApp,
+        ref,
+        reactive,
+        computed,
+      } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+
+      createApp({
+        setup() {
+          const firstName = ref("John");
+          const lastName = ref("Doe");
+
+          const fullName = computed({
+            // getter
+            get() {
+              return firstName.value + " " + lastName.value;
+            },
+            // setter
+            set(newValue) {
+              // 注意：我们这里使用的是解构赋值语法
+              [firstName.value, lastName.value] = newValue.split(" ");
+            },
+          });
+          // 等价
+          // const fullName = computed(() => firstName.value + " " + lastName.value);
+
+          return {
+            firstName,
+            lastName,
+            fullName,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
